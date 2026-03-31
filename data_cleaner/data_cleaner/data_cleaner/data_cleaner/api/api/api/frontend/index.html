@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Cleaning System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🧹 Data Cleaning System</h1>
+            <p>Upload, validate, and clean your data with ease</p>
+        </header>
+
+        <main class="main-content">
+            <!-- Upload Section -->
+            <section class="upload-section">
+                <h2>Step 1: Upload Your Data</h2>
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="fileInput" accept=".csv,.json,.xlsx,.xls,.xml,.parquet,.tsv" hidden>
+                    <p>📁 Drag and drop your file here or click to select</p>
+                    <p class="text-small">Supported formats: CSV, JSON, Excel, XML, Parquet, TSV</p>
+                </div>
+                <div id="fileInfo" class="file-info"></div>
+            </section>
+
+            <!-- Validation Section -->
+            <section class="validation-section">
+                <h2>Step 2: Validate Data</h2>
+                <button id="validateBtn" class="btn btn-primary" disabled>Validate Data</button>
+                <div id="validationReport"></div>
+            </section>
+
+            <!-- Cleaning Configuration -->
+            <section class="cleaning-section">
+                <h2>Step 3: Configure Cleaning</h2>
+                <div class="cleaning-options">
+                    <label class="checkbox">
+                        <input type="checkbox" id="removeDuplicates" checked>
+                        <span>Remove Duplicates</span>
+                    </label>
+                    
+                    <label class="checkbox">
+                        <input type="checkbox" id="handleMissing" checked>
+                        <span>Handle Missing Values</span>
+                    </label>
+                    <div id="missingOptions" class="sub-options">
+                        <label>Strategy:</label>
+                        <select id="missingStrategy">
+                            <option value="mean">Mean</option>
+                            <option value="median">Median</option>
+                            <option value="mode">Mode</option>
+                            <option value="drop">Drop</option>
+                            <option value="forward_fill">Forward Fill</option>
+                            <option value="backward_fill">Backward Fill</option>
+                        </select>
+                    </div>
+                    
+                    <label class="checkbox">
+                        <input type="checkbox" id="removeOutliers">
+                        <span>Remove Outliers</span>
+                    </label>
+                    <div id="outlierOptions" class="sub-options">
+                        <label>Method:</label>
+                        <select id="outlierMethod">
+                            <option value="iqr">IQR</option>
+                            <option value="zscore">Z-Score</option>
+                        </select>
+                    </div>
+                </div>
+                <button id="cleanBtn" class="btn btn-success" disabled>Clean Data</button>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section">
+                <h2>Step 4: Results</h2>
+                <div id="cleaningReport"></div>
+                <div id="downloadSection"></div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2026 Data Cleaning Company. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
